@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  master:
+    image: hadoop-master
+    container_name: hadoop-master
+    hostname: trandong-master
+    ports:
+      - "22:22"
+    networks:
+      test:
+        ipv4_address: 10.5.0.2
+
+  slave:
+    image: hadoop-slave
+    container_name: hadoop-slave
+    hostname: trandong-slave
+    ports:
+      - "22:22"
+    networks:
+      test:
+        ipv4_address: 10.5.0.3
+
+networks:
+  test:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.5.0.0/16
+          gateway: 10.5.0.1
