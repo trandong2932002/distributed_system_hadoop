@@ -24,16 +24,16 @@ RUN tar -xzf hadoop-3.3.4.tar.gz && \
     rm hadoop-3.3.4.tar.gz
 
 # config hadoop
-RUN echo 'export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64  \n\
-export HADOOP_HOME=/home/'$USERNAME'/hadoop \n\
-export PATH=$PATH:$HADOOP_HOME/bin \n\
-export PATH=$PATH:$HADOOP_HOME/sbin \n\
-export HADOOP_MAPRED_HOME=$HADOOP_HOME \n\
-export HADOOP_COMMON_HOME=$HADOOP_HOME \n\
-export HADOOP_HDFS_HOME=$HADOOP_HOME \n\
-export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop \n\
-export HADOOP_YARN_HOME=$HADOOP_HOME \n\
-export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native \n\
-export HADOOP_OPTS="-Djava.library.path=$HADOOP_HOME/lib/native"' >> ~/.bashrc
+RUN echo 'export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64\n\
+export HADOOP_HOME=/home/'$USERNAME'/hadoop\n\
+export PATH=$PATH:$HADOOP_HOME/bin\n\
+export PATH=$PATH:$HADOOP_HOME/sbin\n\
+export HADOOP_MAPRED_HOME=$HADOOP_HOME\n\
+export HADOOP_COMMON_HOME=$HADOOP_HOME\n\
+export HADOOP_HDFS_HOME=$HADOOP_HOME\n\
+export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop\n\
+export HADOOP_YARN_HOME=$HADOOP_HOME\n\
+export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native\n\
+export HADOOP_OPTS="-Djava.library.path=$HADOOP_HOME/lib/native"\n' >> ~/.bashrc
 
-RUN echo 'export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64 \n' >> ~/hadoop/etc/hadoop/hadoop-env.sh
+RUN echo 'export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64\n' >> ~/hadoop/etc/hadoop/hadoop-env.sh

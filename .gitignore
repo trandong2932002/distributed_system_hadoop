@@ -1,1 +1,2 @@
-resources/hadoop-3.3.4.tar.gz
+resources/*.tar.gz
+resources/*.jar

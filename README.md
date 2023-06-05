@@ -5,19 +5,26 @@ You have to download `hadoop-3.3.4.tar.gz` and put it in resources folder
 # Build image
 
 ```
-docker buildx build -f base/Dockerfile -t hadoop-base .
+docker build -f base/Dockerfile -t hadoop-base \
+--build-arg USERNAME=<username> \
+--build-arg USERPASSWD=<password> \
+.
 ```
 
 ## For Master
 
 ```
-docker buildx build -f master/Dockerfile -t hadoop-master .
+docker build -f master/Dockerfile -t hadoop-master \
+--build-arg USERNAME=<username> \
+.
 ```
 
 ## For Slave
 
 ```
-docker buildx build -f slave/Dockerfile -t hadoop-slave .
+docker build -f slave/Dockerfile -t hadoop-slave \
+--build-arg USERNAME=<username> \
+.
 ```
 
 # Run containers
