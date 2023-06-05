@@ -37,7 +37,6 @@ docker run \
 --add-host trandong-slave1:172.18.0.3 \
 --network hadoop \
 --ip 172.18.0.2 \
--p 22 \
 --hostname trandong-master \
 --name hadoop-master \
 -it hadoop-master bash
@@ -51,9 +50,8 @@ docker run \
 --add-host trandong-master:172.18.0.2 \
 --network hadoop \
 --ip 172.18.0.3 \
--p 22 \
 --hostname trandong-slave1 \
---name hadoop-slave \
+--name hadoop-slave1 \
 -it hadoop-slave bash
 ```
 
@@ -61,24 +59,24 @@ docker run \
 
 ## Run ssh service
 
+Start ssh service.
 ```
 sudo service ssh start
 ```
 
-After running all containers, run below commands on Master and all Slaves
+After running all containers, run below commands on Master to get public key.
 ```
-ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa
-cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+cat .ssh/id_rsa.pub
+```
+And copy public key to `authorized_keys` in all Slaves
+
+```
+mkdir .ssh
+cat << EOF >> .ssh/authorized_keys
+<public key>
+EOF
 chmod 600 ~/.ssh/authorized_keys
 ```
-
-Run below command on Master only (If you get a Permission denied, you are right, `Ctrl+C` to done)
-```
-ssh-copy-id -i .ssh/id_rsa hadooptrandong@trandong-slave1
-```
-If you have more Slave than 1, run above command one time for each Slave
-
-After that, you have to copy public key of Master from `~/.ssh/id_rsa.pub` to `authorized_keys` of all Slaves
 
 To test connection between Master and all Slaves, type below command for each Salve
 ```
@@ -103,3 +101,14 @@ hdfs namenode -format
 start-all.sh
 ```
 
+## Start Derby Server
+
+```
+startNetworkServer -h 0.0.0.0 &
+```
+
+## Hive Create Derby Schema
+
+```
+schematool -dbType derby -initSchema
+```
